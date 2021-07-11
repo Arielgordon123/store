@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+  backend:
+    container_name: store_backend
+    depends_on:
+      - db
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+      - 9229:9229
+    environment:
+      - DATABASE_URL=mongodb://db_mongo:27017/store_backend
+    command: yarn start:dev
+    networks:
+      - webnet
+  db:
+    image: mongo
+    container_name: db_mongo
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - "27018:27017"
+    networks:
+      - webnet
+
+networks:
+  webnet:
+
+volumes:
+  mongodata: 
+  # prod:
+  #   container_name: hospital_prod
+  #   image: hospital-prod:1.0.0
+  #   depends_on:
+  #     - db
+  #   build:
+  #       context: .
+  #       target: production
+  #       dockerfile: ./Dockerfile
+  #   command: npm run start:prod
+  #   ports:
+  #       - 3000:3000
+  #       - 9229:9229
+  #   networks:
+  #       - webnet
+  #   volumes:
+  #       - .:/usr/src/app
+  #       - /usr/src/app/node_modules
+  #   restart: unless-stopped
