@@ -1,19 +1,22 @@
-import { Entity, ObjectIdColumn, Column } from 'typeorm';
-import {ObjectID} from 'mongodb'
-@Entity()
-export class Product {
-    @ObjectIdColumn()
-    id: ObjectID;
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-    @Column()
+export type ProductDocument = Product & Document;
+import * as mongoose from 'mongoose';
+@Schema()
+export class Product {
+
+    @Prop()
     name: string;
     
-    @Column()
+    @Prop()
     price: number;
     
-    @Column()
+    @Prop()
     desc: string;
     
-    @Column()
+    @Prop()
     imageUrl: string;
 }
+
+export const ProductSchema = SchemaFactory.createForClass(Product);
