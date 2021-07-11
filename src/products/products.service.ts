@@ -19,13 +19,13 @@ export class ProductsService {
     return this.productModel.find().exec();
   }
 
-  findOne(id: mongoose.Schema.Types.ObjectId) {
-    return this.productModel.findOne(id).exec();
+  findOne(id: string| number):Promise<Product> {
+    return this.productModel.findOne({_id: mongoose.Types.ObjectId(id)}).exec();
   }
 
-  update(id: mongoose.Schema.Types.ObjectId , updateProductDto: UpdateProductDto) {
+  update(id: string| number , updateProductDto: UpdateProductDto) {
     const { _id, ...propsNoId } = updateProductDto;
-    return this.productModel.findOneAndUpdate(id, propsNoId, { new: true }).exec()
+    return this.productModel.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)}, propsNoId, { new: true }).exec()
   }
 
   remove(id: string|number) {
