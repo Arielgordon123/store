@@ -7,13 +7,13 @@ services:
       - db
     build:
       context: .
-      target: development
+      target: production
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     environment:
       - DATABASE_URL=mongodb://db_mongo:27017/store_backend
-    command: yarn start:dev
+    command: yarn start:prod
     networks:
       - webnet
   db:
@@ -25,8 +25,7 @@ services:
       - webnet
 
   frontend:
-    build:
-      context: ../store_frontend/.
+    image: arielgordon/store_frontend
     container_name: store_frontend
     depends_on:
       - backend

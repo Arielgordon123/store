@@ -21,7 +21,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN yarn install--production
+RUN yarn install --production
 
 COPY . .
 
