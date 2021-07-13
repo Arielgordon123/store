@@ -25,7 +25,9 @@ services:
       - webnet
 
   frontend:
-    image: arielgordon/store_frontend
+    # image: arielgordon/store_frontend
+    build:
+      context: ../store_frontend/.
     container_name: store_frontend
     depends_on:
       - backend

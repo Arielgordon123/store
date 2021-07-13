@@ -2,7 +2,7 @@ FROM node:12.19.1 as development
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY package.json yarn.lock ./
 
 RUN yarn global add rimraf
 
@@ -19,7 +19,7 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY package.json yarn.lock ./
 
 RUN yarn install --production
 
