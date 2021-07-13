@@ -16,7 +16,7 @@ export class ProductsService {
   }
 
   findAll() {
-    return this.productModel.find().exec();
+    return this.productModel.find({deleted: false}, {deleted: 0}).exec();
   }
 
   findOne(id: string| number):Promise<Product> {
