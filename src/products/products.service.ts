@@ -30,6 +30,6 @@ export class ProductsService {
 
   remove(id: string|number) {
 
-    return this.productModel.findOneAndDelete({_id: mongoose.Types.ObjectId(id)}).exec();
+    return this.productModel.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)}, {$set: {"deleted":true}}).exec();
   }
 }
